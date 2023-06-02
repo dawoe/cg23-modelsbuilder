@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+
+    <title>DF22 - A journey into the unknown</title>
+
+    <link rel="stylesheet" href="dist/reset.css" />
+    <link rel="stylesheet" href="dist/reveal.css" />
+    <link rel="stylesheet" href="dist/theme/dotcontrol.css" />
+
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css" />
+
+    
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section data-transition="convex">
+          <h1>A journey into the unknown</h1>
+          <h2>DF22</h2>
+        </section>
+        <section>
+          <h2>Introduction</h2>
+          <ul>
+            <li>Dave Woestenborghs</li>
+            <li>Work at <a href="https://dotcontrol.com/">DotControl</a></li>
+            <li>Umbraco MVP (7x)</li>
+            <li>Active community member since 2008</li>
+			<li>Part of the 24 days in Umbraco team</li>
+			<li>Part of the Umbraco Packages Community team.</li>
+          </ul>
+          <aside class="notes">
+            Data drive agency with offices in r'dam, heerlen and curacoa<br />
+            MVP since 2016<br />
+            First blog written in 2008
+          </aside>
+        </section>		
+        <section>
+          <h2>Today is about</h2>
+          <p>Improving the editor experience</p>
+          <p class="fragment">Hooking into the request pipeline</p>         
+          <aside class="notes"></aside>
+        </section>
+		
+		<section>
+			<h1>Improving the editor experience</h1>
+			<aside class="notes">
+				- Done by installing packages
+				- Creating custom editors
+				- Doctype setup (icons, labels, description, tabs)
+				- But can also be done by hooking into various notifications in Umbraco
+			</aside>
+		</section>
+
+		<section>
+			<h2>Limiting the page create menu</h2>
+			<p class="fragment">Handle SendingAllowedChildrenNotification</p>
+			<p class="fragment">New since 9.5</p>
+			<p class="fragment">Is raised when the create menu is clicked and doctype options are shown.</p>
+			<aside class="notes">
+				- If only one settings node is needed, prevent editors from creating more than one
+				- Often solved, by removing it from allowed children in doctype configuration.
+			</aside>
+		</section>
+
+		<section>
+			<h2>Removing the delete action</h2>
+			<p class="fragment">Handle <a href="https://our.umbraco.com/Documentation/Extending/Section-Trees/Trees/#menurenderingnotification">MenuRenderingNotification</a> </p>
+			<p class="fragment">Is raised whenever a menu is generated for a tree node.</p>
+		</section>
+
+		<section>
+			<h2>Removing the unpublish action</h2>
+			<p class="fragment">Handle <a href="https://our.umbraco.com/Documentation/Reference/Notifications/EditorModel-Notifications/">SendingContentNotification</a></p>
+			<p class="fragment">Raised right before the editor model is sent for editing in the content section.</p>			
+		</section>
+
+		<!-- <section>
+			<h2>Hiding properties and tabs</h2>
+		</section> -->
+
+		<section>
+			<h2>Customizing backend search</h2>
+			<p class="fragment">By default only a few fields are searched.</p>
+			<p class="fragment">Can be extended by replacing the the implementation of <a href="https://our.umbraco.com/Documentation/Extending/Backoffice-Search/">IUmbracoTreeSearcherFields</a></p>
+		</section>
+
+		<section>
+			<h1>Hooking into the request pipeline</h1>			
+		</section>
+
+		<section>
+			<h2>Replacing content</h2>
+			<p class="fragment">Handle <a href="https://our.umbraco.com/Documentation/Implementation/Custom-Routing/#routingrequestnotification">RoutingRequestNotification</a></p>
+			<p class="fragment">Published right after the point when the PublishedRequestBuilder is prepared, but before it is ready to be processed.</p>
+		</section>
+
+		<section>
+			<h2>Changing url segment</h2>
+			<p>By default the url segment of a content node will be based its name.</p>
+			<p class="fragment">"Dutch User Group" will become "dutch-user-group"</p>
+		</section>
+
+		<section>
+			<h2>Changing url segment</h2>
+			<p>Can be customized by implementing a <a href="https://our.umbraco.com/Documentation/Reference/Routing/Request-Pipeline/outbound-pipeline#url-segment-provider">Url segment provider</a></p>			
+		</section>
+
+		<section>
+			<h2>Changing url segment</h2>
+			<p>Generated segments are stored with the content item in cache.</p>			
+		</section>
+
+		<section>
+			<h2>Changing paths</h2>
+			<p>By default umbraco builds up the path of a item based on the generated url segments</p>
+		</section>
+
+		<section>
+			<h2>Changing paths</h2>
+			<p>This can be customized by implementing a <a href="https://our.umbraco.com/Documentation/Reference/Routing/Request-Pipeline/outbound-pipeline#custom-url-provider">Custom url provider.</a></p>
+		</section>
+
+		<section>
+			<h2>Changing paths</h2>
+			<p>Paths are not cached and generated on the fly.</p>
+		</section>
+
+		<section>
+			<h2>Changing paths</h2>
+			<p>The generated path can't be connected to a content item by Umbraco.</p>
+			<p></p>
+		</section>
+
+		<section>
+			<h2>Changing paths</h2>
+			<p>This needs to be handled by implementing a <a href="https://our.umbraco.com/Documentation/Reference/Routing/Request-Pipeline/IContentFinder">Content finder.</a></p>			
+		</section>
+
+		<section>
+			<h2>Virtual routes</h2>
+			<p>Think of custom routes that are executed in the context of a content item.</p>
+		</section>
+
+		<section>
+			<h2>Virtual routes</h2>
+			<p>Done by creating a controller that implements <a href="https://our.umbraco.com/documentation/Reference/Routing/Custom-Routes/#custom-route-with-ivirtualpagecontroller">IVirtualPageController</a>.</p>
+		</section>
+       <section>
+          <h2 style="display:flex; flex-direction:column"><span>Thank you</span></h2>
+         
+          <p>Code examples :
+            <a href="https://github.com/dawoe/df22-journey-into-the-unknown"
+              >https://github.com/dawoe/df22-journey-into-the-unknown</a>
+          </p>
+
+        </section>
+      </div>
+    </div>
+
+    <div id="dc-logo">
+      <a href="https://dotcontrol.com/">
+        <img src="img/dotcontrol-colored.svg" />
+      </a>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script src="plugin/zoom/zoom.js"></script>
+    <script src="dist/mermaid.min.js"></script>
+    <script>
+      // More info about initialization & config:
+      // - https://revealjs.com/initialization/
+      // - https://revealjs.com/config/
+      Reveal.initialize({
+        hash: true,
+
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes, RevealZoom],
+
+		totalTime:1800
+      });
+
+
+      mermaid.mermaidAPI.initialize({
+        startOnLoad: false,		
+		sequence: {
+			mirrorActors : false,
+			useMaxWidth : false,						
+		},
+		
+      });
+
+      let doMermaidStuff = function doMermaidStuff(event) {
+		  console.log(event)
+        let mermaidDivs = event.currentSlide.querySelectorAll(".mermaid");
+
+		let oldContainerDivs = document.querySelectorAll('.mermaidContainer')
+
+		oldContainerDivs.forEach(function(container) {
+			container.parentNode.removeChild(container);
+		});
+
+        let indices = Reveal.getIndices();
+        let pageno = `${indices.h}-${indices.v}`;
+
+        mermaidDivs.forEach(function (mermaidDiv, i) {
+		  mermaidDiv.style.display = 'none';
+		  let mermaidContainerDiv = document.createElement("div");
+		  mermaidContainerDiv.classList.add('mermaidContainer');
+		  mermaidDiv.parentNode.appendChild(mermaidContainerDiv);
+          let insertSvg = function (svgCode, bindFunctions) {
+            mermaidContainerDiv.innerHTML = svgCode;           
+          };
+          let graphDefinition = mermaidDiv.textContent;
+          mermaid.mermaidAPI.render(
+            `mermaid${pageno}-${i}`,
+            graphDefinition,
+            insertSvg
+          );
+        });
+        Reveal.layout();
+      };
+
+      //Reveal.on("ready", (event) => doMermaidStuff(event));
+      Reveal.on("slidechanged", (event) => doMermaidStuff(event));
+    </script>
+
+<style type="text/css">
+	.mermaidContainer {
+		width: 100%;
+		max-width: 100%;
+		display: block;
+	}
+
+	svg[id^="m"][width][height][viewBox] {
+		width: 80%;
+		height: auto;
+	}
+
+	.actor {
+	  stroke: #fff !important;
+	  fill: #ff2345 !important;
+	}
+	text.actor {
+	  fill: #fff !important;
+	  stroke: none !important;
+	  font-family: GalanoGrotesque, Helvetica !important;
+	  text-transform: uppercase;
+	  font-weight: 700 !important;
+	}
+
+	.actor-line {
+	  stroke: #fff !important;
+	}
+
+	.messageLine0 {
+	  stroke-width: 1.5;
+	  stroke-dasharray: "2 2";
+	  marker-end: "url(#arrowhead)";
+	  stroke: #fff !important;
+	}
+
+	.messageLine1 {
+	  stroke-width: 1.5;
+	  stroke-dasharray: "2 2";
+	  stroke: #fff !important;
+	}
+
+	#arrowhead {
+	  fill: #fff !important;
+	}
+
+	#arrowhead path{
+	  fill: #fff !important;
+	  stroke: #fff !important;
+	}
+
+	.messageText {
+	  fill: #fff !important;
+	  stroke: none;
+	  font-family: GalanoGrotesque, "trebuchet ms", verdana, arial !important;
+	  font-size: 14px;
+	  font-weight: 700 !important;
+	}
+
+	.labelBox {
+	  stroke: #fff;
+	  fill: #ff2345 !important;;
+	}
+
+	.labelText {
+	  fill: #fff !important;
+	  stroke: none;
+	  font-family: GalanoGrotesque, "trebuchet ms", verdana, arial !important;
+	}
+
+	.loopText {
+	  fill: #fff !important;
+	  stroke: none;
+	  font-family: GalanoGrotesque, "trebuchet ms", verdana, arial !important;
+	}
+
+	.loopText>tspan {
+	  fill: #fff !important;
+	  stroke: none;
+	  font-family: GalanoGrotesque, "trebuchet ms", verdana, arial !important;
+	}
+
+	.loopLine {
+	  stroke-width: 2;
+	  stroke-dasharray: "2 2";
+	  marker-end: "url(#arrowhead)";
+	  stroke: #fff !important;
+	}
+
+	.note {
+	  stroke: #ff2345 !important;
+	  fill: #fff !important;
+	}
+
+	.noteText>tspan {
+	  fill: #ff2345 !important;
+	  color:  #ff2345 !important;;
+	  stroke: none;
+	  font-family: GalanoGrotesque, "trebuchet ms", verdana, arial !important;
+	  font-size: 14px;
+	}
+	
+  </style>
+  </body>
+</html>
