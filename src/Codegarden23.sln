@@ -5,6 +5,8 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Codegarden23.Website", "Codegarden23.Website\Codegarden23.Website.csproj", "{31C7BB15-ADBD-4C9E-9BCF-B35035E7956C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Codegarden23.Core", "Codegarden23.Core\Codegarden23.Core.csproj", "{9B553497-AF89-4866-A0B4-C5E0286265D9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{31C7BB15-ADBD-4C9E-9BCF-B35035E7956C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{31C7BB15-ADBD-4C9E-9BCF-B35035E7956C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{31C7BB15-ADBD-4C9E-9BCF-B35035E7956C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B553497-AF89-4866-A0B4-C5E0286265D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B553497-AF89-4866-A0B4-C5E0286265D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B553497-AF89-4866-A0B4-C5E0286265D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B553497-AF89-4866-A0B4-C5E0286265D9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
