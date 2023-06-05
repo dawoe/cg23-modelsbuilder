@@ -11,4 +11,8 @@
     <PackageReference Include="Umbraco.Cms.Web.Website" Version="11.4.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="ContentModels\Generated\" />
+  </ItemGroup>
+
 </Project>
