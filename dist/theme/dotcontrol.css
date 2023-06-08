@@ -397,6 +397,11 @@ pre code {
   line-height: 1.1rem;
 }
 
+pre code.medium {
+  font-size: 1.5rem;
+  line-height: 1.6rem;
+}
+
 pre code.large {
   font-size: 2rem;
   line-height: 2.2rem;
