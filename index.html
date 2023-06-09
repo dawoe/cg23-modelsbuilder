@@ -155,6 +155,127 @@
             </code>
           </pre>
         </section>
+        <section>
+          <h1>Benefits</h1>
+        </section>
+        <section>
+          <h2>Templating</h2>
+          <pre>
+            <code data-trim data-noescape class="cshtml-razor medium">
+              @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+
+              @{
+                  var title = (string)Model.Value("pageTitle");
+
+                  var anotherTitle = Model.Value&lt;string&gt;("pageTitle");
+              }
+
+              &lt;h1&gt;@title&lt;/h1&gt;
+            </code>
+          </pre>
+        </section>
+        <section>
+          <h2>Templating</h2>
+          <pre>
+            <code data-trim data-noescape class="cshtml-razor medium">
+              @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage&lt;Blog&gt;
+
+              @{
+                  var title = Model.PageTitle;
+              }
+
+              &lt;h1&gt;@title&lt;/h1&gt;
+            </code>
+          </pre>
+        </section>
+        <section>
+          <h2>Querying</h2>
+          <pre>
+            <code data-trim data-noescape class="cshtml-razor medium">
+              @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage;
+
+              @{
+                  var blogs = Model.ChildrenOfType(&quot;blogPost&quot;)
+                      .OrderByDescending(x =&gt; x.Value&lt;DateTime&gt;(&quot;publicationDate&quot;))
+                      .Take(Model.Value&lt;int&gt;(&quot;howManyPostsShouldBeShown&quot;));
+              }
+            </code>
+          </pre>
+        </section> 
+        <section>
+          <h2>Querying</h2>
+          <pre>
+            <code data-trim data-noescape class="cshtml-razor medium">
+              @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage&lt;Blog&gt;
+
+              @{
+                  var blogs = Model.Children&lt;Blogpost&gt;()
+                      .OrderByDescending(x =&gt; x.PublicationDate)
+                      .Take(Model.HowManyPostsShouldBeShown);
+              }
+            </code>
+          </pre>
+        </section>
+        <section>
+          <h2>Type checking</h2>
+          <pre>
+            <code data-trim data-noescape class="cshtml-razor medium">
+              @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+
+              @{
+                if (Model.IsDocumentType(&quot;blogPost&quot;))
+                {
+                    
+                }            
+              }
+            </code>
+          </pre>
+        </section>  
+        <section>
+          <h2>Type checking</h2>
+          <pre>
+            <code data-trim data-noescape class="cshtml-razor medium">
+              @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+
+              @{
+                if (Model is Blogpost blogPost)
+                {
+            
+                }
+              }
+            </code>
+          </pre>
+          </section>
+          <section>
+            <h2>Type checking</h2>
+            <pre>
+              <code data-trim data-noescape class="cshtml-razor medium">
+                @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+
+                @{
+                    if (Model.IsComposedOf(&quot;contentBase&quot;))
+                    {
+                        
+                    }                   
+                }
+              </code>
+            </pre>
+        </section>
+        <section>
+          <h2>Type checking</h2>
+          <pre>
+            <code data-trim data-noescape class="cshtml-razor medium">
+              @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+
+              @{
+                  if (Model is IContentBase contentBase)
+                  {
+
+                  }
+              }
+            </code>
+          </pre>
+      </section>     
       </div>
     </div>
 
@@ -168,6 +289,7 @@
     <script src="plugin/notes/notes.js"></script>
     <script src="plugin/markdown/markdown.js"></script>
     <script src="plugin/highlight/highlight.js"></script>
+    <script src="plugin/highlight/cshtml-razor.min.js"></script>
     <script src="plugin/zoom/zoom.js"></script>   
     <script>
       // More info about initialization & config:
