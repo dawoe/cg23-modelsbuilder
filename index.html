@@ -303,7 +303,7 @@
         </section>
         <section>
           <h3>ModelsMode</h3>
-            <p>Specifies how the models are generated.
+            <p>Specifies how and when the models are generated.
             </p>           
         </section>
         <section>
@@ -413,10 +413,59 @@
           <h2>Things to avoid</h2>
           <ul>
             <li>Avoid properties that query the content tree.</li>
-            <li>Don't store data in private variables.</li>
+            <li class="fragment">Don't store data in private variables.</li>
           </ul>
+        </section>       
+         <section>
+          <pre>
+            <code data-trim data-noescape class="language-csharp medium">              
+              public partial class ContentPage
+              {
+                private Home _homePage;
+                public Home HomePage
+                {
+                    get
+                    {
+                        if (_homePage is null)
+                        {
+                            _homePage = this.AncestorOrSelf<Home>(1);
+                        }
+                        return _homePage;
+                    }
+                }
+              }
+            </code>
+          </pre>         
         </section>
-
+         <section>
+          <h2>Partials location</h2>
+          <p>
+            You can have the generated models and your own partial classes in seperate folders.
+            <br>Partials in a folder called Models
+            <br>Generated fiels in a folder called Models/Generated
+          </p>
+        </section>
+         <section>
+          <h2>Partials location</h2>
+          <p>
+            You can have them in the same folder and have visual studio nest them.
+           <br><img src="img/visual studio.png" />
+          </p>
+        </section>
+        <section>
+          <h2>Partials location</h2>
+          <p>Add the following to your csproj file</p>
+          <pre>
+            <code data-trim data-noescape class="language-xml medium">              
+              &lt;ItemGroup&gt;
+                &lt;Compile Update=&quot;**\*.generated.cs&quot;&gt;
+                  &lt;DependentUpon&gt;$([System.String]::Copy(%(Filename)).Replace(&#39;.generated&#39;, &#39;.cs&#39;))
+                  &lt;/DependentUpon&gt;
+                &lt;/Compile&gt;
+              &lt;/ItemGroup&gt;
+            </code>
+          </pre>
+        </section>
         <section>
           <h1>Custom generation</h1>
         </section>
