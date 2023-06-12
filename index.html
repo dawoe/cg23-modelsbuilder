@@ -376,12 +376,62 @@
           </aside> 
         </section>
         <section>
-          <h3>DebugLevel</h3>I
+          <h3>DebugLevel</h3>
           <p>Set this to a value higher to 0 to have increased logging           
           </p>
           <aside class="notes">              
             Only do this on development environments.
           </aside> 
+        </section>
+
+        <section>
+          <h1>Extending</h1>
+        </section>
+        <section>
+          <p>Because the models are generated as partial classes they can be extended with custom properties and methods.</p>
+          <aside class="notes">              
+            Create a partial class with the same name in the configured namespace.
+            You can only create custom properties and methods.
+            No inheritance, no constructor with same signature and no generated properties.
+          </aside> 
+        </section>
+        <section>
+          <pre>
+            <code data-trim data-noescape class="language-csharp large">              
+              public partial class ContentPage
+              {
+                  public bool HasPageTitle => 
+                    !string.IsNullOrWhiteSpace(this.PageTitle);
+
+                  public string BrowserTitle 
+                      => this.HasPageTitle ? this.PageTitle : this.Name;
+              }
+            </code>
+          </pre>         
+        </section>
+        <section>
+          <h2>Things to avoid</h2>
+          <ul>
+            <li>Avoid properties that query the content tree.</li>
+            <li>Don't store data in private variables.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h1>Custom generation</h1>
+        </section>
+        <section>
+          <p>Use a custom modelsbuiler package. <br>
+             <a href="https://marketplace.umbraco.com/package/limbo.umbraco.modelsbuilder" target="_blank">Limbo Models Builder</a></p>
+        </section>
+        <section>
+          <p>Or implement your own generator.
+            <br>Since Umbraco 11.4 you can create a class that implements <a href="https://docs.umbraco.com/umbraco-cms/reference/templating/modelsbuilder/understand-and-extend#imodelsgenerator">IModelsGenerator</a>
+          </p>
+        </section>
+
+        <section>
+          <h1>Thank you!</h1>
         </section>
       </div>
     </div>
