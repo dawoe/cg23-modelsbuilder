@@ -18,6 +18,8 @@
 
         <div class="col-md-9">
             <article>
+                <h1>@Model.HomePage.UpdateDate  - From model</h1>
+                <h1>@(Model.AncestorOrSelf<Home>().UpdateDate) -- From content</h1>
                 @await Html.GetBlockGridHtmlAsync(Model, "bodyText")
             </article>
         </div>
